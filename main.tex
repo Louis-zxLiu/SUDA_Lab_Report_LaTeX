@@ -1,0 +1,182 @@
+\documentclass[a4paper,zihao=5]{ctexart} % 五号字体
+% 页面设置
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+
+% 字体设置
+% ctexart 默认会尝试自动检测系统字体。
+% 如果需要强制指定字体，可以使用 fontset 选项或如下手动设置。
+
+\setCJKmainfont[AutoFakeBold=true, AutoFakeSlant=true]{SimSun}
+\setCJKsansfont{SimHei}
+\setCJKmonofont{SimSun}
+\setCJKfamilyfont{kaiti}{KaiTi}
+\newcommand{\kaiti}{\CJKfamily{kaiti}}
+
+% 其他宏包
+\usepackage{fancyhdr}  % 页眉页脚
+\usepackage{lastpage}  % 最后一页
+\usepackage{tabularx}  % 表格
+\usepackage{multirow}  % 多行表格
+\usepackage[most]{tcolorbox} % 跨页文本框
+\usepackage{titlesec}  % 标题格式
+\usepackage{ulem}      % 下划线
+\usepackage{indentfirst} % 首行缩进
+\usepackage{graphicx}    % 图片支持
+\usepackage{listings}    % 代码块支持
+\usepackage{xcolor}      % 颜色支持
+\usepackage{caption}     % 图片标题支持
+
+% 代码块设置
+\lstset{
+    basicstyle=\ttfamily\footnotesize, % 字体大小
+    keywordstyle=\bfseries\color{blue}, % 关键字颜色
+    commentstyle=\itshape\color{gray},  % 注释颜色
+    stringstyle=\color{red!60!black},   % 字符串颜色
+    breaklines=true,       % 自动换行
+    frame=single,          % 代码框
+    numbers=left,          % 行号位置
+    numberstyle=\tiny,     % 行号字体
+    tabsize=4,             % 制表符宽度
+    captionpos=b,          % 标题位置
+    keepspaces=true,       % 保留空格
+    showstringspaces=false % 不显示字符串中的空格
+}
+
+% --------------------------------------------------
+% 变量定义 - 请在此处填写你的信息
+% --------------------------------------------------
+\newcommand{\school}{计算机科学与技术学院}
+\newcommand{\class}{2022级 计算机科学与技术}
+\newcommand{\myname}{张三}
+\newcommand{\studentid}{2200000000}
+\newcommand{\coursename}{操作系统实验}
+\newcommand{\teacher}{李四}
+\newcommand{\partner}{无}
+\newcommand{\dateyear}{2025}
+\newcommand{\datemonth}{12}
+\newcommand{\dateday}{17}
+% --------------------------------------------------
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{} % 清空当前设置
+\renewcommand{\headrulewidth}{0pt} % 去掉页眉线
+\fancyfoot[C]{第 \thepage 页，共 \pageref{LastPage} 页}
+\fancyfoot[R]{\kaiti 教务处制}
+
+% 标题格式设置
+% 一级标题：一、  (小四号 12pt) 
+\titleformat{\section}{\bfseries\fontsize{10.5pt}{12.6pt}\selectfont}{}{0em}{\thesection、}
+% 二级标题：1.
+\titleformat{\subsection}{\bfseries\fontsize{10.5pt}{12.6pt}\selectfont}{}{0em}{\thesubsection.}
+% 标题编号
+\renewcommand{\thesection}{\chinese{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+
+% 正文段落设置
+\setlength{\parindent}{2em} % 首行缩进2字符
+\setlength{\parskip}{0pt}   % 段落间距
+
+% 跨页框设置
+\newtcolorbox{reportbox}{
+    colback=white,
+    colframe=black,
+    sharp corners,
+    boxrule=1pt,
+    breakable,
+    left=6pt, right=6pt, top=6pt, bottom=6pt,
+    before skip=0pt,
+    after skip=0pt
+}
+
+\begin{document}
+
+% 标题
+\begin{center}
+    {\kaiti \fontsize{24pt}{24pt}\selectfont \uuline{苏州大学实验报告}}
+\end{center}
+\vspace{0.5em}
+
+% 信息表格
+\begin{center}
+\kaiti \fontsize{12pt}{15pt}\selectfont
+\renewcommand{\arraystretch}{1.5}
+\setlength{\tabcolsep}{2pt}
+% 设置表格列垂直居中
+\renewcommand{\tabularxcolumn}[1]{m{#1}}
+% 定义居中的 X 列，调整 hsize
+% 注意：所有 X 列的 hsize 之和必须等于 X 列的数量（这里是 2）
+\newcolumntype{Y}{>{\centering\arraybackslash\hsize=0.9\hsize}X}
+\newcolumntype{Z}{>{\centering\arraybackslash\hsize=1.1\hsize}X}
+
+\begin{tabularx}{\textwidth}{|p{4.5em}<{\centering}|Y|p{5.5em}<{\centering}|Z|p{3em}<{\centering}|p{4.5em}<{\centering}|p{3em}<{\centering}|p{6.5em}<{\centering}|}
+    \hline
+    院、系 & \school & 
+    年级专业 & \class & 
+    姓名 & \myname & 
+    学号 & \studentid \\
+    \hline
+    课程名称 & \multicolumn{5}{c|}{\coursename} & 成绩 & \\
+    \hline
+    指导教师 & \teacher & 同组实验者 & \multicolumn{2}{c|}{\partner} & 实验日期 & \multicolumn{2}{c|}{\dateyear-\datemonth-\dateday} \\
+    \hline
+\end{tabularx}
+\end{center}
+
+\vspace{0.5em}
+
+% 正文内容框
+\begin{reportbox}
+% 设置正文字体大小为五号 (10.5pt)
+\fontsize{10.5pt}{15.75pt}\selectfont 
+
+\section{实验目的}
+1. 掌握......
+2. 理解......
+
+\section{实验内容}
+本次实验的主要内容包括......
+
+\section{实验步骤和结果}
+\subsection{步骤一}
+描述步骤一的过程......
+
+\subsection{步骤二}
+描述步骤二的过程......
+
+\section{实验总结}
+通过本次实验，我学习到了......
+
+% \section{附录：源代码}
+% 1、实验环境:Visual Studio Code, GNU C++ 编译器(g++)
+
+% 2、
+% (1) test.cpp
+% \begin{lstlisting}[language=C++]
+% #include <iostream>
+
+% int main() {
+%     // 打印 Hello World
+%     std::cout << "Hello, World!" << std::endl;
+%     return 0;
+% }
+% \end{lstlisting}
+
+% --------------------------------------------------
+% 图片插入模板 (请取消注释使用)
+% --------------------------------------------------
+% 注意：在 reportbox 环境中不能使用 figure 浮动环境，
+% 请直接使用 includegraphics 并配合 captionof 添加标题。
+% --------------------------------------------------
+% \begin{center}
+%     % 请确保图片文件在同一目录下，或指定路径
+%     % width=0.8\textwidth 表示图片宽度为文本宽度的 80%
+%     \includegraphics[width=0.8\textwidth]{preview.jpg} 
+%     \captionof{figure}{图片标题}
+%     \label{fig:example}
+% \end{center}
+% --------------------------------------------------
+
+\end{reportbox}
+
+\end{document}
