@@ -17,7 +17,6 @@
 \usepackage{lastpage}  % 最后一页
 \usepackage{tabularx}  % 表格
 \usepackage{multirow}  % 多行表格
-\usepackage[most]{tcolorbox} % 跨页文本框
 \usepackage{titlesec}  % 标题格式
 \usepackage{ulem}      % 下划线
 \usepackage{indentfirst} % 首行缩进
@@ -25,6 +24,7 @@
 \usepackage{listings}    % 代码块支持
 \usepackage{xcolor}      % 颜色支持
 \usepackage{caption}     % 图片标题支持
+\usepackage{enumitem}    % 列表间距控制
 
 % 代码块设置
 \lstset{
@@ -50,6 +50,8 @@
 \newcommand{\myname}{张三}
 \newcommand{\studentid}{2200000000}
 \newcommand{\coursename}{操作系统实验}
+\newcommand{\experimentno}{1}
+\newcommand{\reporttitle}{实验报告正文}
 \newcommand{\teacher}{李四}
 \newcommand{\partner}{无}
 \newcommand{\dateyear}{2025}
@@ -73,21 +75,12 @@
 \renewcommand{\thesection}{\chinese{section}}
 \renewcommand{\thesubsection}{\arabic{subsection}}
 
-% 正文段落设置
-\setlength{\parindent}{2em} % 首行缩进2字符
-\setlength{\parskip}{0pt}   % 段落间距
-
-% 跨页框设置
-\newtcolorbox{reportbox}{
-    colback=white,
-    colframe=black,
-    sharp corners,
-    boxrule=1pt,
-    breakable,
-    left=6pt, right=6pt, top=6pt, bottom=6pt,
-    before skip=0pt,
-    after skip=0pt
-}
+% 正文排版
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0pt}
+\titlespacing*{\section}{0pt}{0pt}{0pt}
+\titlespacing*{\subsection}{0pt}{0pt}{0pt}
+\setlist{topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
 
 \begin{document}
 
@@ -125,14 +118,17 @@
 
 \vspace{0.5em}
 
-% 正文内容框
-\begin{reportbox}
-% 设置正文字体大小为五号 (10.5pt)
-\fontsize{10.5pt}{15.75pt}\selectfont 
+% 正文标题
+\begin{center}
+    \zihao{3} \heiti \coursename 实验 \underline{\makebox[2cm][c]{\experimentno}}：\underline{\makebox[6cm][c]{\reporttitle}}
+\end{center}
+\vspace{0.5em}
 
 \section{实验目的}
-1. 掌握......
-2. 理解......
+\begin{enumerate}
+    \item 掌握......
+    \item 理解......
+\end{enumerate}
 
 \section{实验内容}
 本次实验的主要内容包括......
@@ -147,36 +143,37 @@
 \section{实验总结}
 通过本次实验，我学习到了......
 
-% \section{附录：源代码}
-% 1、实验环境:Visual Studio Code, GNU C++ 编译器(g++)
+\clearpage
+\appendix
+\begin{center}
+    {\bfseries \fontsize{14pt}{16.8pt}\selectfont 附录：源代码}
+\end{center}
+\vspace{0.5em}
+\noindent 1、实验环境:Visual Studio Code, GNU C++ 编译器(g++)
 
-% 2、
-% (1) test.cpp
-% \begin{lstlisting}[language=C++]
-% #include <iostream>
+\noindent 2、(1) test.cpp
+\begin{lstlisting}[language=C++]
+#include <iostream>
 
-% int main() {
-%     // 打印 Hello World
-%     std::cout << "Hello, World!" << std::endl;
-%     return 0;
-% }
-% \end{lstlisting}
+int main() {
+    // 打印 Hello World
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}
+\end{lstlisting}
 
 % --------------------------------------------------
 % 图片插入模板 (请取消注释使用)
 % --------------------------------------------------
-% 注意：在 reportbox 环境中不能使用 figure 浮动环境，
-% 请直接使用 includegraphics 并配合 captionof 添加标题。
-% --------------------------------------------------
-% \begin{center}
+% \begin{figure}[htbp]
+%     \centering
 %     % 请确保图片文件在同一目录下，或指定路径
 %     % width=0.8\textwidth 表示图片宽度为文本宽度的 80%
-%     \includegraphics[width=0.8\textwidth]{preview.jpg} 
-%     \captionof{figure}{图片标题}
+%     \includegraphics[width=0.8\textwidth]{preview.jpg}
+%     \caption{图片标题}
 %     \label{fig:example}
-% \end{center}
+% \end{figure}
+% 交叉引用示例：如图 \ref{fig:example} 所示。
 % --------------------------------------------------
-
-\end{reportbox}
 
 \end{document}

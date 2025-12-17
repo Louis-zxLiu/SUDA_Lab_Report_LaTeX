@@ -7,6 +7,8 @@
 
 授权许可及版权声明见 LICENSE。请合理使用本项目。苏州大学名称、徽标等标识归苏州大学所有，本模板中的使用仅为指示目的。
 
+模板文件按 MIT 许可发布，但是依据此模板或其衍生作品、利用 xelatex 编译出来的 PDF 文件无需附带版权声明。
+
 ## 使用说明
 本仓库包含 LaTeX 版本的实验报告模板 (`main.tex`)。
 
@@ -18,8 +20,9 @@
 1. 确保已安装 TeX 发行版。
 2. 打开 `main.tex` 文件。
 3. 在文件头部的“变量定义”区域修改个人信息（姓名、学号、课程名称等）。
-4. 在 `reportbox` 环境中编写实验报告正文。
-5. 运行 `xelatex main.tex` 生成 PDF。
+4. 修改正文标题相关变量：`\experimentno`（实验序号）与 `\reporttitle`（实验标题）。
+5. 直接在正文部分编写实验报告内容（`\section` / `\subsection` 等）。
+6. 运行 `xelatex main.tex` 生成 PDF。
 
 ### 进阶功能说明
 
@@ -34,15 +37,18 @@ int main() {
 }
 \end{lstlisting}
 ```
+代码块默认带边框；如不需要，可在 `main.tex` 的 `\lstset` 中将 `frame=single` 改为 `frame=none`。
 
 #### 2. 插入图片
-**重要提示**：由于正文包含在跨页边框 (`reportbox`) 中，**严禁使用 `figure` 浮动环境**，否则会报错（如 `Not in outer par mode`）。
-请使用非浮动方式插入图片（模板中已预置注释代码）：
+模板支持使用标准 `figure` 环境插入图片（模板中已预置注释代码）：
 ```latex
-\begin{center}
+\begin{figure}[htbp]
+    \centering
     \includegraphics[width=0.8\textwidth]{your-image.png}
-    \captionof{figure}{图片标题} % 需要 caption 宏包支持
-\end{center}
+    \caption{图片标题}
+    \label{fig:example}
+\end{figure}
+% 交叉引用示例：如图 \ref{fig:example} 所示。
 ```
 
 ### 字体配置
